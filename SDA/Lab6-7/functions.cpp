@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "headerlab6.h"
-using namespace std;
 
 void Menu(int &choice) {
   int tempUserChoice = 0;
