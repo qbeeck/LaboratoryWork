@@ -23,6 +23,7 @@ void showAdjacenctyMatrix(int** &array, int &rows);
 void showIncidenceMatrix(int** &array, int &rows, int &cols);
 void showAdjacencyList(vector <vector <int>> &adjList);
 
+void deleteMemory(vector <vector <int>> &adjList, int** &array);
 
 int main() {
   int userChoice = 0;
@@ -46,6 +47,7 @@ int main() {
       break;
     }
   }
+  return 0;
 }
 
 void menu(int &choice) {
@@ -115,9 +117,6 @@ void functionsMenu(
     case 10: 
       showAdjacencyList(adjList);
       break;
-    case 11: 
-
-      break;
   }
 }
 
@@ -170,7 +169,7 @@ void addAdjacencyList(vector <vector <int>> &adjList, int &rows) {
   vector <int> row;
 
   for (int i = 0; i < rows; i++) {
-    cout << "Skoliko cisel vvesti xosh? : ";
+    cout << "Numbers in a line? : ";
     cin >> peaksInRow;
     for (int j = 0; j < peaksInRow; j++) {
       cin >> tempNum;
@@ -241,7 +240,7 @@ void incidenceMatrix_adjacencyList(vector <vector <int>> &adjList, int** &array,
 }
 
 void adjacencyList_incidenceMatrix(vector <vector <int>> &adjList, int** &array, int &rows, int &cols) {
-  cout << "Kolvo-reber? : ";
+  cout << "Number of arcs? : ";
   cin >> cols;
   
   int temp = rows;
@@ -253,7 +252,29 @@ void adjacencyList_incidenceMatrix(vector <vector <int>> &adjList, int** &array,
     array[i] = new int[cols];
   }
 
+  int rowPosition = 0;
+  int vectorNumber = 0;
+  int i = 0;
 
+  while (rowPosition < rows) {
+    vector <int> rowAdjList = adjList[vectorNumber];
+    
+    while (i < rowAdjList.size()) {
+      for (int j = 0; j < cols; j++) {
+        if (vectorNumber == j) {
+          array[rowPosition][vectorNumber] = -1;
+        } else if (rowAdjList[i] == j + 1) {
+          array[rowPosition][j] = 1;
+        } else {
+          array[rowPosition][j] = 0;
+        }
+      }
+      i++;
+      rowPosition++;
+    }
+    i = 0;
+    vectorNumber++;
+  }
 }
 
 void showAdjacenctyMatrix(int** &array, int &rows) {
