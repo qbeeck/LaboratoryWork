@@ -34,6 +34,9 @@ class List {
     void readFromFile(string filename);
     Movie* firstPos();
     void mergeTwoLists(List listName);
+    void twoLists(List listname);
+    Movie * middle();
+    void changeLength();
 };
 
 void List::addElement(string fileName) {
@@ -255,6 +258,7 @@ int List::lengthList() {
     currentPosition++;
   }
 
+  cout << "currentposition" << currentPosition << endl;
   return currentPosition;
 }
 
@@ -324,11 +328,42 @@ void List::mergeTwoLists(List listName) {
   length += lengthList();
 }
 
+Movie * List::middle() {
+  int size = length / 2;
+  Movie * temp = first;
+  int counter = 1;
+
+  while (counter != size) {
+    temp = temp->next;
+    counter++;
+  }
+
+  Movie * head = temp->next;
+  temp->next = NULL;
+  return head;
+}
+
+void List::twoLists(List filename) {
+  int size = (filename.lengthList)();
+  int s = size / 2;
+  int sizesecond = size - s;
+  Movie * head = (filename.middle)();
+  first = head;
+  Movie * temp = first;
+
+  while (length != sizesecond) {
+    temp = temp->next;
+    length++;
+  }
+  last = temp;
+}
+
+void List::changeLength() {
+  length = length / 2;
+}
 
 int main () {
   List firstList;
   List secondList;
-  
-// 7. Сортировка
-// 11. разделение списка на два
+
 }
